@@ -87,13 +87,12 @@ class RobotArmTest extends \PHPUnit\Framework\TestCase
         $params = [ 8,1]; //based off ex. input
         $blocks = $this->createMock(\App\Blocks::class);
 
-        $blocks->method('getStacks')
+        $blocks->expects($this->once())->method('getStacks')
             ->willReturn( [ 1,1]);
 
-        //  blocks are same [1,1] thus $block->move should not be called.
-        // we set its return value to false and assert for true as always
-        $blocks->method('move')
-            ->willReturn(false);
+        //  blocks are same [1,1] thus $block->move should not be called within pile onto.
+        $blocks->expects($this->never())->method('move');
+
         $robot = new RobotArm($blocks);
         $this->assertTrue($robot->pileOnto(...$params));
 
