@@ -57,7 +57,7 @@ class RobotArm
         if ($blockA === $blockB || $stackA === $stackB) {
             return true;
         }
-        $this->blocks->reset($stackB, $stackB);
+        $this->blocks->reset($stackB, $blockB);
 
         return $this->blocks->move($blockA, $stackA, $stackB);
     }
